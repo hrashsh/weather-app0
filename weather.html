@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>weather app</title>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h2><i></i><span id="location"></span></h2>
+            <h6 id="weather"></h6>
+            <h4><span id="temp"></span></h4>
+            
+            <button onclick="window.location.reload();" class="refresh"></button>
+        </div>
+    </div>
+</body>
+<script type="text/javascript">
+    link = "https://api.openweathermap.org/data/2.5/weather?q=bangalore&appid=19ba7f75471987de6887b8f7812d12f0";
+    var request = new XMLHttpRequest();
+    request.open('GET',link,true);
+    request.onload= function(){
+        console.log(obj);
+        var obj = JSON.parse(this.response);
+        document.getElementById('weather').innerHTML= obj.weather[0].description;
+        document.getElementById('location').innerHTML= obj.name;
+        document.getElementById('temp').innerHTML= obj.main.temp - 273.15;
+    }
+    if(request.status==200){
+        console.log("ERROR");
+    }
+    request.send();
+  </script>
+</html>
